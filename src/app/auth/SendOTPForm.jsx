@@ -1,6 +1,7 @@
 import TextField from "@/common/TextField";
+import SpinnerMini from "../../ui/SpinnerMini";
 
-function SendOTPForm({ phoneNumber, onChange, onSubmit }) {
+function SendOTPForm({ phoneNumber, onChange, onSubmit, isPending }) {
   return (
     <div>
       <form className="space-y-10" onSubmit={onSubmit}>
@@ -10,7 +11,13 @@ function SendOTPForm({ phoneNumber, onChange, onSubmit }) {
           value={phoneNumber}
           onChange={onChange}
         />
-        <button className="btn btn--primary w-full">ارسال کد تایید</button>
+        {isPending ? (
+          <div className="flex justify-center">
+            <SpinnerMini />
+          </div>
+        ) : (
+          <button className="btn btn--primary w-full">ارسال کد تایید</button>
+        )}
       </form>
     </div>
   );
