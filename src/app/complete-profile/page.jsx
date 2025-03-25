@@ -22,14 +22,12 @@ function CompleteProfile() {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const { message } = await mutateAsync(data);
       toast.success(message);
       router.push("/");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      console.log(error);
     }
   };
 
