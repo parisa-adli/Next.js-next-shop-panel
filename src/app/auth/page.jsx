@@ -16,7 +16,7 @@ function AuthPage() {
   const [time, setTime] = useState(RESEND_TIME);
 
   const {
-    data,
+    data: otpResponse,
     isPending,
     error,
     mutateAsync: mutateGetOtp,
@@ -38,6 +38,7 @@ function AuthPage() {
       toast.success(data.message);
       setStep(2);
       setTime(RESEND_TIME);
+      setOtp("")
     } catch (error) {
       // console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
@@ -50,6 +51,8 @@ function AuthPage() {
       const data = await mutateCheckOtp({ phoneNumber, otp });
       toast.success(data.message);
       setStep(2);
+      // push -> complete-profile
+      // isActive -> /  : /complete-profile
     } catch (error) {
       // console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
@@ -83,6 +86,7 @@ function AuthPage() {
             onBack={() => setStep((s) => s - 1)}
             time={time}
             onResendOtp={sendOtpHandler}
+            otpResponse={otpResponse}
           />
         );
       default:

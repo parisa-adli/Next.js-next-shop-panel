@@ -1,8 +1,17 @@
 import Button from "@/ui/Button";
 import OTPInput from "react-otp-input";
 import { FaArrowRight } from "react-icons/fa6";
+import { TbEdit } from "react-icons/tb";
 
-function CheckOTPForm({ onSubmit, otp, setOtp, onBack, time, onResendOtp }) {
+function CheckOTPForm({
+  otpResponse,
+  onSubmit,
+  otp,
+  setOtp,
+  onBack,
+  time,
+  onResendOtp,
+}) {
   return (
     <div>
       <button
@@ -12,14 +21,26 @@ function CheckOTPForm({ onSubmit, otp, setOtp, onBack, time, onResendOtp }) {
         <FaArrowRight />
         <span>برگشت</span>
       </button>
-      <div>
+
+      {otpResponse && (
+        <div className="flex items-center gap-x-1 mb-2">
+          <p className="text-sm text-gray-700">{otpResponse.message}</p>
+          <button onClick={onBack}>
+            <TbEdit className="text-primary-900" />
+          </button>
+        </div>
+      )}
+
+      <div className="mb-4">
         {time > 0 ? (
-          <p>{time} ثانیه تا ارسال مجدد کد</p>
+          <p className="text-sm text-gray-500">{time} ثانیه تا ارسال مجدد کد</p>
         ) : (
-          <button onClick={onResendOtp}>ارسال مجدد کد؟</button>
+          <button className="text-sm text-gray-500" onClick={onResendOtp}>
+            ارسال مجدد کد؟
+          </button>
         )}
       </div>
-      <form className="space-y-10 mt-4" onSubmit={onSubmit}>
+      <form className="space-y-10" onSubmit={onSubmit}>
         <p>کد تایید را وارد کنید</p>
         <OTPInput
           value={otp}
@@ -33,7 +54,7 @@ function CheckOTPForm({ onSubmit, otp, setOtp, onBack, time, onResendOtp }) {
             borderRadius: "0.5rem",
             outline: "none",
           }}
-          containerStyle="flex gap-x-2 justify-center"
+          containerStyle="flex flex-row-reverse gap-x-2 justify-center"
           renderInput={(props) => <input {...props} />}
         />
         <Button>تایید</Button>
