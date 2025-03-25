@@ -6,14 +6,16 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { checkOtp, getOtp } from "@/services/authServices";
 import CheckOTPForm from "./CheckOTPForm";
+import { useRouter } from "next/navigation";
 
 const RESEND_TIME = 90;
 
 function AuthPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_TIME);
+  const router = useRouter();
 
   const {
     data: otpResponse,
@@ -23,9 +25,11 @@ function AuthPage() {
   } = useMutation({
     mutationFn: getOtp,
   });
-  const { mutateAsync: mutateCheckOtp } = useMutation({
-    mutationFn: checkOtp,
-  });
+  const { isPending: isCheckingOtp, mutateAsync: mutateCheckOtp } = useMutation(
+    {
+      mutationFn: checkOtp,
+    }
+  );
 
   const phoneNumberHandler = (e) => {
     setPhoneNumber(e.target.value);
@@ -38,7 +42,7 @@ function AuthPage() {
       toast.success(data.message);
       setStep(2);
       setTime(RESEND_TIME);
-      setOtp("")
+      setOtp("");
     } catch (error) {
       // console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
@@ -48,11 +52,13 @@ function AuthPage() {
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateCheckOtp({ phoneNumber, otp });
-      toast.success(data.message);
-      setStep(2);
-      // push -> complete-profile
-      // isActive -> /  : /complete-profile
+      const { user, message } = await mutateCheckOtp({ phoneNumber, otp });
+      toast.success(message);
+      if (user.isActive) {
+        router.push("/");
+      } else {
+        router.push("/complete-profile");
+      }
     } catch (error) {
       // console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
@@ -87,6 +93,7 @@ function AuthPage() {
             time={time}
             onResendOtp={sendOtpHandler}
             otpResponse={otpResponse}
+            isCheckingOtp={isCheckingOtp}
           />
         );
       default:

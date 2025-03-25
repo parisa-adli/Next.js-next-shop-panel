@@ -11,6 +11,7 @@ function CheckOTPForm({
   onBack,
   time,
   onResendOtp,
+  isCheckingOtp,
 }) {
   return (
     <div>
@@ -57,7 +58,13 @@ function CheckOTPForm({
           containerStyle="flex flex-row-reverse gap-x-2 justify-center"
           renderInput={(props) => <input {...props} />}
         />
-        <Button>تایید</Button>
+        {isCheckingOtp ? (
+          <div className="flex justify-center">
+            <SpinnerMini />
+          </div>
+        ) : (
+          <Button>تایید</Button>
+        )}
       </form>
     </div>
   );
