@@ -4,39 +4,76 @@ import SendOTPForm from "./SendOTPForm";
 import http from "@/services/httpService";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { getOtp } from "@/services/authServices";
+import { checkOtp, getOtp } from "@/services/authServices";
+import CheckOTPForm from "./CheckOTPForm";
 
 function AuthPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { data, isPending, error, mutateAsync } = useMutation({
+  const [step, setStep] = useState(2);
+  const [otp, setOtp] = useState("");
+  const {
+    data,
+    isPending,
+    error,
+    mutateAsync: mutateGetOtp,
+  } = useMutation({
     mutationFn: getOtp,
+  });
+  const { mutateAsync: mutateCheckOtp } = useMutation({
+    mutationFn: checkOtp,
   });
 
   const phoneNumberHandler = (e) => {
     setPhoneNumber(e.target.value);
   };
 
-  const sendOTPHandler = async (e) => {
+  const sendOtpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber });
+      const data = await mutateGetOtp({ phoneNumber });
       toast.success(data.message);
+      setStep(2);
     } catch (error) {
       // console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
     }
   };
 
+  const checkOtpHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await mutateCheckOtp({ phoneNumber, otp });
+      toast.success(data.message);
+      setStep(2);
+    } catch (error) {
+      // console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const renderSteps = () => {
+    switch (step) {
+      case 1:
+        return (
+          <SendOTPForm
+            phoneNumber={phoneNumber}
+            onChange={phoneNumberHandler}
+            onSubmit={sendOtpHandler}
+            isPending={isPending}
+          />
+        );
+      case 2:
+        return (
+          <CheckOTPForm onSubmit={checkOtpHandler} otp={otp} setOtp={setOtp} />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="flex justify-center">
-      <div className="w-full sm:max-w-sm">
-        <SendOTPForm
-          phoneNumber={phoneNumber}
-          onChange={phoneNumberHandler}
-          onSubmit={sendOTPHandler}
-          isPending={isPending}
-        />
-      </div>
+      <div className="w-full sm:max-w-sm">{renderSteps()}</div>
     </div>
   );
 }
