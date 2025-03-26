@@ -1,6 +1,6 @@
 import TextField from "@/common/TextField";
-import Button from "@/ui/Button";
-import SpinnerMini from "@/ui/SpinnerMini";
+import SpinnerMini from "./SpinnerMini";
+import Button from "./Button";
 
 function SendOTPForm({ phoneNumber, onChange, onSubmit, isPending }) {
   return (

@@ -1,12 +1,12 @@
 "use client";
 import { useForm } from "react-hook-form";
-import Button from "@/ui/Button";
+import Button from "@/pages/(user)/auth/Button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeProfile } from "@/services/authServices";
 import RHFTextField from "@/common/RHFTextField";
-import SpinnerMini from "@/ui/SpinnerMini";
+import SpinnerMini from "@/pages/(user)/auth/SpinnerMini";
 
 function CompleteProfile() {
   const router = useRouter();

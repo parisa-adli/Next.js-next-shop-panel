@@ -9,8 +9,6 @@
       "@/services/*": ["./src/services/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/public/*": ["./public/*"],
-      "@/ui/*": ["./src/ui/*"],
-
     }
   }
 }

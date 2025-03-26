@@ -1,7 +1,8 @@
-import Button from "@/ui/Button";
 import OTPInput from "react-otp-input";
 import { FaArrowRight } from "react-icons/fa6";
 import { TbEdit } from "react-icons/tb";
+import SpinnerMini from "./SpinnerMini";
+import Button from "./Button";
 
 function CheckOTPForm({
   otpResponse,
