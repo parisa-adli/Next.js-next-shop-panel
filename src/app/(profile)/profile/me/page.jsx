@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/common/Loading";
 import TextField from "@/common/TextField";
 import { useGetUser } from "@/hooks/useAuth";
 import { includeObj } from "@/utils/objectUtils";
@@ -15,12 +16,12 @@ function MePage() {
     if (user) setFormData(includeObj(user, includeskey));
   }, [user]);
 
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="max-w-sm">
       <h1 className="text-xl font-bold mb-4">اطلاعات کاربری</h1>
-      <form action="">
+      <form action="" className="space-y-8">
         {Object.keys(includeObj(user, includeskey)).map((key) => {
           return (
             <TextField

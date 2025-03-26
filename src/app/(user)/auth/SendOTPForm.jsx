@@ -1,6 +1,6 @@
 import TextField from "@/common/TextField";
-import SpinnerMini from "./SpinnerMini";
-import Button from "./Button";
+import Button from "@/common/Button";
+import Loading from "@/common/Loading";
 
 function SendOTPForm({ phoneNumber, onChange, onSubmit, isPending }) {
   return (
@@ -14,7 +14,7 @@ function SendOTPForm({ phoneNumber, onChange, onSubmit, isPending }) {
         />
         {isPending ? (
           <div className="flex justify-center">
-            <SpinnerMini />
+            <Loading width="45" height="15"/>
           </div>
         ) : (
           <Button>ارسال کد تایید</Button>

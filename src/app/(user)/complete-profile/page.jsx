@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import Button from "@/pages/(user)/auth/Button";
+import Button from "@/common/Button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";

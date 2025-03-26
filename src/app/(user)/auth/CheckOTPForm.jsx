@@ -1,8 +1,8 @@
 import OTPInput from "react-otp-input";
 import { FaArrowRight } from "react-icons/fa6";
 import { TbEdit } from "react-icons/tb";
-import SpinnerMini from "./SpinnerMini";
-import Button from "./Button";
+import Loading from "@/common/Loading";
+import Button from "@/common/Button";
 
 function CheckOTPForm({
   otpResponse,
@@ -61,7 +61,7 @@ function CheckOTPForm({
         />
         {isCheckingOtp ? (
           <div className="flex justify-center">
-            <SpinnerMini />
+            <Loading width="45" height="15" />
           </div>
         ) : (
           <Button>تایید</Button>
