@@ -15,13 +15,13 @@ function MePage() {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({});
   const { user } = data || {};
-  const includeskey = ["name", "email", "phoneNumber", "biography"];
+  const includesKey = ["name", "email", "phoneNumber", "biography"];
   const { isPending: isUpdating, mutateAsync } = useMutation({
     mutationFn: updateProfile,
   });
 
   useEffect(() => {
-    if (user) setFormData(includeObj(user, includeskey));
+    if (user) setFormData(includeObj(user, includesKey));
   }, [user]);
 
   const submitHandler = async (e) => {
@@ -41,7 +41,7 @@ function MePage() {
     <div className="max-w-sm">
       <h1 className="text-xl font-bold mb-4">اطلاعات کاربری</h1>
       <form onSubmit={submitHandler} className="space-y-8">
-        {Object.keys(includeObj(user, includeskey)).map((key) => {
+        {Object.keys(includeObj(user, includesKey)).map((key) => {
           return (
             <TextField
               label={key}
@@ -59,7 +59,7 @@ function MePage() {
             <Loading width="45" height="15" />
           </div>
         ) : (
-          <Button>ارسال کد تایید</Button>
+          <Button>تایید</Button>
         )}
       </form>
     </div>

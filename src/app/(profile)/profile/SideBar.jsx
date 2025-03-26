@@ -1,14 +1,49 @@
+"use client";
+
 import Link from "next/link";
+import { IoHome } from "react-icons/io5";
+import { HiMiniSquares2X2 } from "react-icons/hi2";
+import { HiUser } from "react-icons/hi2";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { logout } from "@/services/authServices";
 
 function SideBar() {
+  const logoutHandler = async () => {
+    await logout();
+    // localStorage.removeItem("userInfo");
+    // localStorage.removeItem("cartItem");
+    // localStorage.removeItem("token");
+    document.location.href = "/";
+  };
+
   return (
     <div>
       <ul className="flex flex-col space-y-8">
-        <li>
+        <li className="flex items-center gap-x-2">
+          <span>
+            <IoHome className="btnIcon" />
+          </span>
           <Link href="/">صفحه اصلی</Link>
         </li>
-        <li>
+        <li className="flex items-center gap-x-2">
+          <span>
+            <HiMiniSquares2X2 className="btnIcon" />
+          </span>
+          <Link href="/profile">داشبورد</Link>
+        </li>
+        <li className="flex items-center gap-x-2">
+          <span>
+            <HiUser className="btnIcon" />
+          </span>
           <Link href="/profile/me">اطلاعات کاربری</Link>
+        </li>
+        <li>
+          <button onClick={logoutHandler} className="flex items-center gap-x-2">
+            <span>
+              <FaArrowRightFromBracket className="btnIcon" />
+            </span>
+            <span>خروج</span>
+          </button>
         </li>
       </ul>
     </div>

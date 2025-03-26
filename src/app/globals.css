@@ -64,6 +64,9 @@
   .badge--error {
     @apply bg-rose-600 text-white;
   }
+  .btnIcon {
+    @apply w-6 h-6 text-primary-900
+  }
 }
 
 html,
