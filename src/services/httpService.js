@@ -17,15 +17,17 @@ app.interceptors.response.use(
     if (err.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
+        //const { data } = await app.get("/user/refresh-token") -> unlimited request when not refreshToken
         const { data } = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/user/refresh-token`,
           { withCredentials: true }
         );
         if (data) return app(originalConfig);
       } catch (error) {
-        Promise.reject(err);
+        return Promise.reject(error);
       }
     }
+    return Promise.reject(err);
   }
 );
 

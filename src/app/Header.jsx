@@ -31,6 +31,16 @@ function Header() {
               محصولات
             </Link>
           </li>
+          <li>
+            <Link className="block py-2" href="/profile">
+              پنل کاربر
+            </Link>
+          </li>
+          <li>
+            <Link className="block py-2" href="/admin">
+              پنل ادمین
+            </Link>
+          </li>
           {user ? (
             <div className="flex items-center gap-x-6">
               <span>{user.name}</span>
