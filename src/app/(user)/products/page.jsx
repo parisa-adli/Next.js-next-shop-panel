@@ -1,5 +1,6 @@
 import { getCategories } from "@/services/categoryService";
 import { getProducts } from "@/services/productService";
+import CategorySidebar from "./CategorySidebar";
 
 async function ProductsPage() {
   const { products } = await getProducts();
@@ -9,14 +10,7 @@ async function ProductsPage() {
     <div>
       <h1 className="text-xl font-bold mb-6">صفحه محصولات</h1>
       <div className="grid grid-cols-4">
-        <div className="col-span-1">
-          <p className="font-bold mb-4">دسته بندی ها</p>
-          <ul className="space-y-4">
-            {categories.map((category) => (
-              <li key={category._id}>{category.title}</li>
-            ))}
-          </ul>
-        </div>
+        <CategorySidebar categories={categories} />
         <div className="col-span-3 grid grid-cols-3 gap-4">
           {products.map((product) => (
             <div
