@@ -3,6 +3,8 @@ import { getProducts } from "@/services/productService";
 import CategorySidebar from "./CategorySidebar";
 import queryString from "query-string";
 
+export const dynamic = "force-dynamic"; // eq to { cache: 'no-store'} or SSR in page
+
 async function ProductsPage({ searchParams }) {
   const { products } = await getProducts(
     await queryString.stringify(searchParams)
