@@ -6,11 +6,16 @@ import queryString from "query-string";
 export const dynamic = "force-dynamic"; // eq to { cache: 'no-store'} or SSR in page
 
 async function ProductsPage({ searchParams }) {
-  const { products } = await getProducts(
-    await queryString.stringify(searchParams)
-  );
-  const { categories } = await getCategories();
-  // console.log(await queryString.stringify(searchParams));
+  // const { products } = await getProducts(
+  //   await queryString.stringify(searchParams)
+  // );
+  // const { categories } = await getCategories();
+  const productPromise = getProducts(queryString.stringify(await searchParams));
+  const categoryPromise = getCategories();
+  const [{ products }, { categories }] = await Promise.all([
+    productPromise,
+    categoryPromise,
+  ]);
 
   return (
     <div>
