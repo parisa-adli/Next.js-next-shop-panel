@@ -1,3 +1,4 @@
+
 function Button({ children }) {
   return (
     <button type="submit" className="btn btn--primary w-full">
@@ -6,3 +7,4 @@ function Button({ children }) {
   );
 }
 export default Button;
+

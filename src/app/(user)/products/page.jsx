@@ -4,6 +4,7 @@ import CategorySidebar from "./CategorySidebar";
 import queryString from "query-string";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import Link from "next/link";
+import AddToCart from "./[slug]/AddToCart";
 
 export const dynamic = "force-dynamic"; // eq to { cache: 'no-store'} or SSR in page
 
@@ -28,22 +29,23 @@ async function ProductsPage({ searchParams }) {
           <div className="grid grid-cols-3 gap-4">
             {products.map((product) => (
               <div
-                className="col-span-1 border rounded-xl shadow-md p-4"
+                className="col-span-1 border rounded-xl shadow-md p-4 space-y-4"
                 key={product._id}
               >
-                <h2 className="font-bold text-xl mb-4">{product.title}</h2>
-                <div className="mb-4">
+                <h2 className="font-bold text-xl ">{product.title}</h2>
+                <div className="">
                   <span>تاریخ ساختن: </span>
                   <span className="font-bold">
                     {toLocalDateStringShort(product.createdAt)}
                   </span>
                 </div>
                 <Link
-                  className="text-primary-900 font-bold"
+                  className="block text-primary-900 font-bold"
                   href={`/products/${product.slug}`}
                 >
                   مشاهده محصول
                 </Link>
+                <AddToCart product={product} />
               </div>
             ))}
           </div>
