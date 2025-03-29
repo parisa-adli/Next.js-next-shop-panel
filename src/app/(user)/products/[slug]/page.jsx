@@ -1,5 +1,6 @@
 import BreadCrumbs from "@/common/BreadCrumbs";
 import { getOneProductBySlug, getProducts } from "@/services/productService";
+import AddToCart from "./AddToCart";
 
 export const dynamic = "force-static"; // SSG or {cache: "force-cache"}
 export const dynamicParams = false;
@@ -30,10 +31,10 @@ async function SlugPage({ params }) {
           },
         ]}
       />
-      <div>
-        <h1 className="font-bold text-2xl mb-6">{product.title}</h1>
-        <p className="mb-6">{product.description}</p>
-        <p className="mb-6">
+      <div className="space-y-6">
+        <h1 className="font-bold text-2xl ">{product.title}</h1>
+        <p>{product.description}</p>
+        <p>
           <span>قیمت محصول: </span>
           <span
             className={`${product.discount ? "line-through" : "font-bold"}`}
@@ -42,7 +43,7 @@ async function SlugPage({ params }) {
           </span>
         </p>
         {!!product.discount && (
-          <div className="flex items-center gap-x-2 mb-6">
+          <div className="flex items-center gap-x-2">
             <p className="text-xl font-bold">
               قیمت با تخفیف: {product.offPrice}
             </p>
@@ -54,9 +55,7 @@ async function SlugPage({ params }) {
             </div>
           </div>
         )}
-        <div>
-          <button className="btn btn--primary">اضافه کردن به سبد خرید</button>
-        </div>
+        <AddToCart product={product} />
       </div>
     </>
   );

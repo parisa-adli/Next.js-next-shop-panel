@@ -1,6 +1,6 @@
 import { ThreeDots } from "react-loader-spinner";
 
-function Loading({ width = "75", height = "40" }) {
+function Loading({ width = "75", height = "40", justifyContent = "center" }) {
   return (
     <ThreeDots
       visible={true}
@@ -11,7 +11,7 @@ function Loading({ width = "75", height = "40" }) {
       ariaLabel="three-dots-loading"
       wrapperStyle={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: justifyContent,
       }}
     />
   );
