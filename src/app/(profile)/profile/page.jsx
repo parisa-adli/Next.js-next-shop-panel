@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetUser } from "@/hooks/useAuth";
-import toLocalDateStringShort from "@/utils/toLocalDate";
+import toLocalDateStringShort, { toLocalDateString } from "@/utils/toLocalDate";
 
 function Profile() {
   const { isLoading, data } = useGetUser();
@@ -9,10 +9,10 @@ function Profile() {
   if (isLoading) return <p>Loading....</p>;
   return (
     <div>
-      <h1>{user.name} خوش آمدید</h1>
+      <h1>سلام! {user.name} خوش آمدید</h1>
       <p>
         <span>تاریخ پیوستن : </span>
-        <span>{toLocalDateStringShort(user.createdAt)}</span>
+        <span>{toLocalDateString(user.createdAt)}</span>
       </p>
     </div>
   );

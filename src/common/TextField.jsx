@@ -12,6 +12,7 @@ function TextField({ label, name, value, onChange }) {
         id={name}
         value={value}
         onChange={onChange}
+        disabled={name === "phoneNumber"}
       />
     </div>
   );
