@@ -41,15 +41,20 @@ function Header() {
               پنل ادمین
             </Link>
           </li>
+          <li>
+            <Link className="flex items-center gap-x-3" href="/cart">
+              <span>سبد خرید</span>
+              <span className="relative">
+                <FaCartShopping className="w-5 h-5 text-primary-900" />
+                <span className="absolute -bottom-1.5 -right-2 bg-rose-500 px-[3px] rounded-full text-white text-sm">
+                  {cart ? cart.payDetail.productIds.length : 0}
+                </span>
+              </span>
+            </Link>
+          </li>
           {user ? (
             <div className="flex items-center gap-x-6">
               <span>{user.name}</span>
-              <Link className="relative" href="/cart">
-                <FaCartShopping className="w-6 h-6 text-primary-900" />
-                <span className="absolute -bottom-1.5 -right-2 bg-red-500 px-1 rounded-full text-white text-sm">
-                  {cart ? cart.payDetail.productIds.length : 0}
-                </span>
-              </Link>
             </div>
           ) : (
             <li>
