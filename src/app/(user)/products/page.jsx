@@ -5,6 +5,9 @@ import queryString from "query-string";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import Link from "next/link";
 import AddToCart from "./[slug]/AddToCart";
+import LikeProduct from "./LikeProduct";
+import { cookies } from "next/headers";
+import { toStringCookies } from "@/utils/toStringCookies";
 
 export const dynamic = "force-dynamic"; // eq to { cache: 'no-store'} or SSR in page
 
@@ -13,7 +16,13 @@ async function ProductsPage({ searchParams }) {
   //   await queryString.stringify(searchParams)
   // );
   // const { categories } = await getCategories();
-  const productPromise = getProducts(queryString.stringify(await searchParams));
+
+  const cookieStore = await cookies();
+  const strCookies =await toStringCookies(cookieStore);
+  const productPromise = getProducts(
+    queryString.stringify(await searchParams),
+    strCookies
+  );
   const categoryPromise = getCategories();
   const [{ products }, { categories }] = await Promise.all([
     productPromise,
@@ -39,12 +48,15 @@ async function ProductsPage({ searchParams }) {
                     {toLocalDateStringShort(product.createdAt)}
                   </span>
                 </div>
-                <Link
-                  className="block text-primary-900 font-bold"
-                  href={`/products/${product.slug}`}
-                >
-                  مشاهده محصول
-                </Link>
+                <div className="flex items-center gap-x-2">
+                  <LikeProduct product={product} />
+                  <Link
+                    className="block text-primary-900 font-bold border-r pr-2"
+                    href={`/products/${product.slug}`}
+                  >
+                    مشاهده محصول
+                  </Link>
+                </div>
                 <AddToCart product={product} />
               </div>
             ))}
