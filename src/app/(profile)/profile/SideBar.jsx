@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoHome } from "react-icons/io5";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { HiUser } from "react-icons/hi2";
-import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { MdPayment, MdLogout } from "react-icons/md";
 import { logout } from "@/services/authServices";
 
 function SideBar() {
@@ -37,10 +37,16 @@ function SideBar() {
           </span>
           <Link href="/profile/me">اطلاعات کاربری</Link>
         </li>
+        <li className="flex items-center gap-x-2">
+          <span>
+            <MdPayment className="btnIcon" />
+          </span>
+          <Link href="/profile/payments">سفارشات</Link>
+        </li>
         <li>
           <button onClick={logoutHandler} className="flex items-center gap-x-2">
             <span>
-              <FaArrowRightFromBracket className="btnIcon" />
+              <MdLogout className="btnIcon" />
             </span>
             <span>خروج</span>
           </button>

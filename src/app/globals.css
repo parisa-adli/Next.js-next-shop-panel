@@ -50,7 +50,7 @@
     @apply border-b  border-b-gray-300 p-3 pr-8 pb-3 text-right;
   }
   .badge {
-    @apply whitespace-nowrap px-3 py-1 rounded-xl;
+    @apply whitespace-nowrap px-2 py-0.5 rounded-xl;
   }
   .badge--primary {
     @apply bg-primary-900 text-white;
@@ -65,7 +65,13 @@
     @apply bg-rose-600 text-white;
   }
   .btnIcon {
-    @apply w-6 h-6 text-primary-900
+    @apply w-6 h-6 text-primary-900;
+  }
+  .table__th {
+    @apply border-b border-b-gray-500 font-medium p-3 pr-8 pb-3 text-right;
+  }
+  .table__td {
+    @apply border-b border-b-gray-300 p-3 pr-8 pb-3 text-right;
   }
 }
 
