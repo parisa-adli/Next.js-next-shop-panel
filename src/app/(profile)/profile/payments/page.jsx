@@ -11,8 +11,8 @@ function page() {
   if (isLoading) return <Loading />;
 
   return (
-      <div>
-      <h1 className="font-bold text-lg">سفارشات کاربر</h1>
+    <div className="border rounded-xl p-4 mt-8">
+      <h1 className="font-bold">سفارشات کاربر</h1>
       <PaymentTable payments={payments} />
     </div>
   );

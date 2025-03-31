@@ -51,6 +51,7 @@ function MePage() {
               onChange={(e) =>
                 setFormData({ ...formData, [e.target.name]: e.target.value })
               }
+              disabled={key === "phoneNumber"}
             />
           );
         })}

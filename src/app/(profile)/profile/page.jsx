@@ -5,11 +5,12 @@ import toLocalDateStringShort, { toLocalDateString } from "@/utils/toLocalDate";
 import Link from "next/link";
 import PaymentTable from "./payments/PaymentTable";
 import { FaEye } from "react-icons/fa";
+import Loading from "@/common/Loading";
 
 function Profile() {
   const { isLoading, data } = useGetUser();
   const { user, payments } = data || {};
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loading />;
   return (
     <div>
       <h1 className="mb-4">

@@ -1,4 +1,4 @@
-function TextField({ label, name, value, onChange }) {
+function TextField({ label, name, value, onChange, disabled = "" }) {
   return (
     <div>
       <label htmlFor={name} className="block mb-4">
@@ -12,7 +12,7 @@ function TextField({ label, name, value, onChange }) {
         id={name}
         value={value}
         onChange={onChange}
-        disabled={name === "phoneNumber"}
+        disabled={disabled}
       />
     </div>
   );
