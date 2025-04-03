@@ -2,7 +2,13 @@
 
 import Button from "@/common/Button";
 import TextField from "@/common/TextField";
+import { useGetCategories } from "@/hooks/useCategories";
+import { useAddProduct } from "@/hooks/useProducts";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import Select from "react-select";
+import { TagsInput } from "react-tag-input-component";
 
 const productsFormData = [
   {
@@ -53,6 +59,10 @@ const productsFormData = [
 ];
 
 function AddProductPage() {
+ const router= useRouter()
+  const { isLoading, mutateAsync } = useAddProduct();
+  const { data } = useGetCategories();
+  const { categories } = data || {};
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -71,10 +81,25 @@ function AddProductPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { message } = await mutateAsync({
+        ...formData,
+        tags,
+        category: selectedCategory._id,
+      });
+      toast.success(message);
+      router.push("/admin/products")
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="max-w-sm">
       <h1 className="mb-4 font-bold text-xl">افزودن محصول</h1>
-      <form className="space-y-8">
+      <form className="space-y-4" onSubmit={handleSubmit}>
         {productsFormData.map((item) => (
           <TextField
             key={item.id}
@@ -84,7 +109,35 @@ function AddProductPage() {
             onChange={handChange}
           />
         ))}
-        <Button>اضافه کردن محصول</Button>
+        <div>
+          <label htmlFor="tags" className="mb-2">
+            تگ محصولات
+          </label>
+          <TagsInput
+            id="tags"
+            // placeHolder="تگ"
+            value={tags}
+            onChange={setTags}
+            name="tags"
+          />
+        </div>
+        <div>
+          <label htmlFor="category" className="mb-2">
+            دسته بندی
+          </label>
+          <Select
+            instanceId="category"
+            onChange={setSelectedCategory}
+            options={categories}
+            getOptionLabel={(option) => option.title}
+            getOptionValue={(option) => option._id}
+          />
+        </div>
+        <div>
+          {
+            isLoading ? <Loading/> : <Button>اضافه کردن محصول</Button>
+          }
+        </div>
       </form>
     </div>
   );
