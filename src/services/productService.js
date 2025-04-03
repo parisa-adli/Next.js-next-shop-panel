@@ -34,3 +34,9 @@ export function likeProduct(id) {
 export function addProduct(data) {
   return http.post(`/admin/product/add`, data).then(({ data }) => data.data);
 }
+
+export function updateProduct({ productId, data }) {
+  return http
+    .patch(`/admin/product/update/${productId}`, data)
+    .then(({ data }) => data.data);
+}
