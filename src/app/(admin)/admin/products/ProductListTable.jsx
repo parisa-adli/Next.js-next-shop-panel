@@ -4,7 +4,9 @@ import {
   toPersianNumbersWithComma,
 } from "@/utils/toPersianNumber";
 import Link from "next/link";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEdit } from "react-icons/fa";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { FiEdit3 } from "react-icons/fi";
 
 function ProductListTable({ products }) {
   return (
@@ -38,13 +40,17 @@ function ProductListTable({ products }) {
                 {toPersianNumbers(product.countInStock)} عدد
               </td>
               <td className="table__td">
-                <Link
-                  className="text-sm text-secondary-700 flex items-center gap-x-1"
-                  href={`/admin/products/${product._id}`}
-                >
-                  <FaEye />
-                  <span>جزئیات</span>
-                </Link>
+                <div className="flex items-center gap-x-2">
+                  <Link href={`/admin/products/${product._id}`}>
+                    <FaEye className="w-5 h-5 text-primary-900" />
+                  </Link>
+                  <Link href={`/admin/products/edit/${product._id}`}>
+                    <FiEdit3 className="w-5 h-5 text-secondary-600" />
+                  </Link>
+                  <button>
+                    <HiOutlineTrash className="w-5 h-5 text-rose-500" />
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

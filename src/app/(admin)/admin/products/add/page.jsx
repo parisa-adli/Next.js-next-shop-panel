@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/common/Button";
+import Loading from "@/common/Loading";
 import TextField from "@/common/TextField";
 import { useGetCategories } from "@/hooks/useCategories";
 import { useAddProduct } from "@/hooks/useProducts";
@@ -59,7 +60,7 @@ const productsFormData = [
 ];
 
 function AddProductPage() {
- const router= useRouter()
+  const router = useRouter();
   const { isLoading, mutateAsync } = useAddProduct();
   const { data } = useGetCategories();
   const { categories } = data || {};
@@ -90,7 +91,7 @@ function AddProductPage() {
         category: selectedCategory._id,
       });
       toast.success(message);
-      router.push("/admin/products")
+      router.push("/admin/products");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -134,9 +135,11 @@ function AddProductPage() {
           />
         </div>
         <div>
-          {
-            isLoading ? <Loading/> : <Button>اضافه کردن محصول</Button>
-          }
+          {isLoading ? (
+            <Loading width="45" height="15" />
+          ) : (
+            <Button>اضافه کردن محصول</Button>
+          )}
         </div>
       </form>
     </div>
