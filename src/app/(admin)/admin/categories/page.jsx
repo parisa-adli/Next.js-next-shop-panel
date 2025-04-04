@@ -1,31 +1,31 @@
 "use client";
 
 import Loading from "@/common/Loading";
-import { useGetProducts } from "@/hooks/useProducts";
-import ProductsTable from "./ProductListTable";
 import Link from "next/link";
 import { FaPlusCircle } from "react-icons/fa";
+import { useGetCategories } from "@/hooks/useCategories";
+import CategoryListTable from "./CategoryListTable";
 
-function ProductsPage() {
-  const { data, isLoading } = useGetProducts();
-  const { products } = data || {};
+function CategoryPage() {
+  const { data, isLoading } = useGetCategories();
+  const { categories } = data || {};
 
   if (isLoading) return <Loading />;
 
   return (
     <div className="border rounded-xl p-4 mt-8">
       <div className="flex items-center justify-between">
-        <h1 className="font-bold">محصولات</h1>
+        <h1 className="font-bold">دسته بندی ها</h1>
         <Link
-          href="/admin/products/add"
+          href="/admin/categories/add"
           className="flex items-center text-primary-900 gap-x-1 text-sm font-bold"
         >
           <FaPlusCircle />
-          اضافه کردن محصول
+          اضافه کردن دسته بندی
         </Link>
       </div>
-      <ProductsTable products={products} />
+      <CategoryListTable categories={categories} />
     </div>
   );
 }
-export default ProductsPage;
+export default CategoryPage;
