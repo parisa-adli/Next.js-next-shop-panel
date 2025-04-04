@@ -12,7 +12,7 @@ const productsFormData = [
   },
   {
     id: 2,
-    label: "توضیخات",
+    label: "توضیحات",
     name: "description",
   },
   {

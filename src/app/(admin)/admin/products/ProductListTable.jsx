@@ -4,11 +4,27 @@ import {
   toPersianNumbersWithComma,
 } from "@/utils/toPersianNumber";
 import Link from "next/link";
-import { FaEye, FaEdit } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { FiEdit3 } from "react-icons/fi";
+import { useRemoveProduct } from "@/hooks/useProducts";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 function ProductListTable({ products }) {
+  const { mutateAsync } = useRemoveProduct();
+  const queryClient = useQueryClient();
+
+  const removeProductHandler = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ["get-products"] });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="shadow-sm overflow-auto my-8">
       <table className="border-collapse table-auto w-full min-w-[800px] text-sm ">
@@ -47,7 +63,9 @@ function ProductListTable({ products }) {
                   <Link href={`/admin/products/edit/${product._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button>
+                  <button
+                    onClick={() => removeProductHandler(product._id)}
+                  >
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
                   </button>
                 </div>
