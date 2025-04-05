@@ -12,7 +12,7 @@ function ProductPage() {
   const { id } = useParams();
   const { data, isLoading } = useGetProductById(id);
   const { product } = data || {};
-
+  console.log(product);
   if (isLoading) return <Loading />;
   return (
     <div className="space-y-6">
