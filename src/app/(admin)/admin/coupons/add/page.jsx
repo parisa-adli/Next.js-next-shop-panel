@@ -16,7 +16,7 @@ function AddCouponPage() {
     amount: "",
     usageLimit: "",
   });
-  const [type, setType] = useState("");
+  const [type, setType] = useState("percent");
   const [productIds, setProductIds] = useState([]);
   const [expireDate, setExpireDate] = useState(new Date());
   const { isLoading, mutateAsync } = useAddNewCoupon();

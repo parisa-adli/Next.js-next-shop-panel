@@ -11,3 +11,9 @@ export function getOneCoupon(id) {
 export function addNewCoupon(data) {
   return http.post("/admin/coupon/add", data).then(({ data }) => data.data);
 }
+
+export function updateCoupon({ id, data }) {
+  return http
+    .patch(`/admin/coupon/update/${id}`, data)
+    .then(({ data }) => data.data);
+}

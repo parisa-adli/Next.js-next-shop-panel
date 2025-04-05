@@ -18,25 +18,26 @@ function CouponForm({
   expireDate,
   setExpireDate,
   isLoading,
+  defaultValue = "",
 }) {
   return (
     <form onSubmit={onSubmit} className="space-y-6 max-w-sm">
       <TextField
         label="کد"
         name="code"
-        value={formData.code}
+        value={formData.code || ""}
         onChange={onFormChange}
       />
       <TextField
         label="مقدار"
         name="amount"
-        value={formData.amount}
+        value={formData.amount || ""}
         onChange={onFormChange}
       />
       <TextField
         label="ظرفیت"
         name="usageLimit"
-        value={formData.usageLimit}
+        value={formData.usageLimit || ""}
         onChange={onFormChange}
       />
       <div>
@@ -71,12 +72,13 @@ function CouponForm({
           options={options}
           getOptionLabel={(option) => option.title}
           getOptionValue={(option) => option._id}
+          defaultValue={defaultValue}
         />
       </div>
       <div>
         <span className="block mb-2">تاریخ انقضا</span>
         <DatePicker
-          inputClass="textField__input w-full"
+          inputClass="textField__input w-[330px]"
           className="w-full"
           value={expireDate}
           onChange={(date) => setExpireDate(date)}
