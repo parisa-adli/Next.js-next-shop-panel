@@ -1,5 +1,5 @@
-import { getAllCoupons } from "@/services/couponServices";
-import { useQuery } from "@tanstack/react-query";
+import { addNewCoupon, getAllCoupons } from "@/services/couponServices";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetCoupons = () =>
   useQuery({
@@ -8,3 +8,5 @@ export const useGetCoupons = () =>
     retry: false,
     refetchOnWindowFocus: true,
   });
+
+export const useAddNewCoupon = () => useMutation({ mutationFn: addNewCoupon });

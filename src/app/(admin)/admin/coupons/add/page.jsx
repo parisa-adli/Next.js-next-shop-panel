@@ -5,6 +5,14 @@ import TextField from "@/common/TextField";
 import { useGetProducts } from "@/hooks/useProducts";
 import { useState } from "react";
 import Select from "react-select";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import Button from "@/common/Button";
+import { useAddNewCoupon } from "@/hooks/useCoupons";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import Loading from "@/common/Loading";
 
 function AddCouponPage() {
   const { data } = useGetProducts();
@@ -16,17 +24,34 @@ function AddCouponPage() {
   });
   const [type, setType] = useState("");
   const [productIds, setProductIds] = useState([]);
-
-  console.log(productIds);
+  const [expireDate, setExpireDate] = useState(new Date());
+  const { isLoading, mutateAsync } = useAddNewCoupon();
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { message } = await mutateAsync({
+        ...formData,
+        type,
+        expireDate: new Date(expireDate).toISOString(),
+        productIds: productIds.map((p) => p._id),
+      });
+      toast.success(message);
+      router.push("/admin/coupons");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="mb-10">
-      <h1 className="mb-4 font-bold text-xl">اضافه کردن کد تخفیف</h1>
-      <form className="space-y-4 max-w-sm">
+      <h1 className="mb-8 font-bold text-xl">اضافه کردن کد تخفیف</h1>
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-sm">
         <TextField
           label="کد"
           name="code"
@@ -67,7 +92,9 @@ function AddCouponPage() {
           </div>
         </div>
         <div>
-          <label htmlFor="products">شامل محصولات</label>
+          <label htmlFor="products" className="mb-2 block">
+            شامل محصولات
+          </label>
           <Select
             isMulti
             instanceId="products"
@@ -76,6 +103,25 @@ function AddCouponPage() {
             getOptionLabel={(option) => option.title}
             getOptionValue={(option) => option._id}
           />
+        </div>
+        <div>
+          <span className="block mb-2">تاریخ انقضا</span>
+          <DatePicker
+            inputClass="textField__input w-full"
+            className="w-full"
+            value={expireDate}
+            onChange={(date) => setExpireDate(date)}
+            format="YYYY/MM/DD"
+            calendar={persian}
+            locale={persian_fa}
+          />
+        </div>
+        <div>
+          {isLoading ? (
+            <Loading width="45" height="15" />
+          ) : (
+            <Button>تایید</Button>
+          )}
         </div>
       </form>
     </div>
