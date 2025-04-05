@@ -4,8 +4,24 @@ import { FaEye } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { FiEdit3 } from "react-icons/fi";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRemoveCategory } from "@/hooks/useCategories";
+import toast from "react-hot-toast";
 
 function CategoryListTable({ categories }) {
+  const { mutateAsync } = useRemoveCategory();
+  const queryClient = useQueryClient();
+
+  const removeCategoryHandler = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ["get-categories"] });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="shadow-sm overflow-auto my-8">
       <table className="border-collapse table-auto w-full min-w-[800px] text-sm ">
@@ -28,9 +44,7 @@ function CategoryListTable({ categories }) {
                 {category.description}
               </td>
               <td className="table__td">
-                <span className="badge badge--secondary">
-                  {category.type}
-                </span>
+                <span className="badge badge--secondary">{category.type}</span>
               </td>
 
               <td className="table__td">
@@ -44,7 +58,7 @@ function CategoryListTable({ categories }) {
                   <Link href={`/admin/categories/edit/${category._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button>
+                  <button onClick={() => removeCategoryHandler(category._id)}>
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
                   </button>
                 </div>
