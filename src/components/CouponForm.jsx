@@ -42,7 +42,7 @@ function CouponForm({
       />
       <div>
         <span>نوع کد تخفیف</span>
-        <div className="border rounded-lg py-2 px-8 mt-2 flex items-center justify-between">
+        <div className="border rounded-lg p-2 mt-2 flex items-center justify-around">
           <RadioInput
             checked={type === "percent"}
             id="percent-type"
@@ -78,7 +78,7 @@ function CouponForm({
       <div>
         <span className="block mb-2">تاریخ انقضا</span>
         <DatePicker
-          inputClass="textField__input w-[330px]"
+          inputClass="textField__input w-[384px]"
           className="w-full"
           value={expireDate}
           onChange={(date) => setExpireDate(date)}

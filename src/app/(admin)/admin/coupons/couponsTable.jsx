@@ -6,25 +6,25 @@ import { FiEdit3 } from "react-icons/fi";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useGetPayments } from "@/hooks/usePayments";
 import {
   toPersianNumbers,
   toPersianNumbersWithComma,
 } from "@/utils/toPersianNumber";
+import { useRemoveCoupon } from "@/hooks/useCoupons";
 
 function CouponsTable({ coupons }) {
-  //   const { mutateAsync } = useGetPayments();
-  //   const queryClient = useQueryClient();
+  const { mutateAsync } = useRemoveCoupon();
+  const queryClient = useQueryClient();
 
-  //   const removeCategoryHandler = async (id) => {
-  //     try {
-  //       const { message } = await mutateAsync(id);
-  //       toast.success(message);
-  //       queryClient.invalidateQueries({ queryKey: ["get-categories"] });
-  //     } catch (error) {
-  //       toast.error(error?.response?.data?.message);
-  //     }
-  //   };
+  const removeCouponHandler = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ["get-coupons"] });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <div className="shadow-sm overflow-auto my-8">
@@ -75,9 +75,7 @@ function CouponsTable({ coupons }) {
                   <Link href={`/admin/coupons/edit/${coupon._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button
-                  //   onClick={() => removecouponHandler(coupon._id)}
-                  >
+                  <button onClick={() => removeCouponHandler(coupon._id)}>
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
                   </button>
                 </div>
