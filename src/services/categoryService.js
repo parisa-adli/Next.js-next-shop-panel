@@ -1,7 +1,7 @@
 import http from "./httpService";
 
-export function getCategories() {
-  return http.get("/category/list").then(({ data }) => data.data);
+export function getCategories(options) {
+  return http.get("/category/list", options).then(({ data }) => data.data);
 }
 
 export function getCategoryById(id) {

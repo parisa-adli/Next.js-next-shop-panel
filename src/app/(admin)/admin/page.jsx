@@ -1,6 +1,14 @@
-function Admin() {
+import CardsWrapper from "@/components/CartWrapper";
+import { useGetPayments } from "@/hooks/usePayments";
+import { Suspense } from "react";
+
+async function Admin() {
   return (
-    <div>صفحه ادمین</div>
-  )
+    <div>
+      <Suspense fallback={<p>loading</p>}>
+        <CardsWrapper />
+      </Suspense>
+    </div>
+  );
 }
-export default Admin
+export default Admin;

@@ -9,7 +9,7 @@ import { RiCoupon2Line } from "react-icons/ri";
 import { FaBasketShopping } from "react-icons/fa6";
 import { logout } from "@/services/authServices";
 
-function AdminSideBAr() {
+function AdminSideBar() {
   const logoutHandler = async () => {
     await logout();
     document.location.href = "/";
@@ -73,4 +73,4 @@ function AdminSideBAr() {
     </div>
   );
 }
-export default AdminSideBAr;
+export default AdminSideBar;

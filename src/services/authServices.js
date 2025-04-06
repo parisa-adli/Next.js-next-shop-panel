@@ -29,6 +29,6 @@ export function logout() {
 
 //* admin related fetches :
 
-export function getAllUsers() {
-  return http.get("/admin/user/list").then(({ data }) => data.data);
+export function getAllUsers(options) {
+  return http.get("/admin/user/list", options).then(({ data }) => data.data);
 }
