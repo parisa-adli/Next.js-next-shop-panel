@@ -203,3 +203,50 @@ export const couponListTHeads = [
     label: "عمیات",
   },
 ];
+
+export const paymentDetailTHeads = [
+  {
+    id: 1,
+    label: "#",
+  },
+  {
+    id: 2,
+    label: "وضعیت سفارش",
+  },
+  {
+    id: 3,
+    label: "تاریخ سفارش",
+  },
+  {
+    id: 4,
+    label: "شماره فاکتور",
+  },
+  {
+    id: 5,
+    label: "مبلغ سفارش",
+  },
+  {
+    id: 6,
+    label: "توضیحات سفارش",
+  },
+  {
+    id: 7,
+    label: "قیمت اصلی",
+  },
+  {
+    id: 8,
+    label: "تخفیف",
+  },
+  {
+    id: 9,
+    label: "مبلغ پرداختی",
+  },
+  {
+    id: 10,
+    label: "نام کاربر",
+  },
+  {
+    id: 11,
+    label: "شماره تلفن",
+  },
+];

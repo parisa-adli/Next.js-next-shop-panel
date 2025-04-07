@@ -79,10 +79,11 @@ function PaymentListTable({ payments }) {
               </td>
               <td className="table__td">
                 <Link
+                  className="text-sm text-secondary-700 flex items-center gap-x-1"
                   href={`/admin/payments/${payment._id}`}
-                  className="flex justify-center"
                 >
-                  <FaEye className="w-5 h-5 text-primary-900" />
+                  <FaEye />
+                  <span>جزئیات</span>
                 </Link>
               </td>
             </tr>
