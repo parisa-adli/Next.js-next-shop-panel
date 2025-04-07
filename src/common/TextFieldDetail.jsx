@@ -1,4 +1,4 @@
-function UserTable({ label, name, value }) {
+function TextFieldDetail({ label, name, value }) {
   return (
     <div className="grid grid-cols-3 gap-x-4">
       <label htmlFor={name} className="block mb-2 col-span-1">
@@ -15,4 +15,4 @@ function UserTable({ label, name, value }) {
     </div>
   );
 }
-export default UserTable;
+export default TextFieldDetail;
