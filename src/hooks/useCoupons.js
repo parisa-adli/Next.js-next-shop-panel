@@ -15,7 +15,7 @@ export const useGetCoupons = () =>
     refetchOnWindowFocus: true,
   });
 
-export const useGetOneCoupons = (id) =>
+export const useGetOneCoupon = (id) =>
   useQuery({
     queryKey: ["get-coupon", id],
     queryFn: () => getOneCoupon(id),

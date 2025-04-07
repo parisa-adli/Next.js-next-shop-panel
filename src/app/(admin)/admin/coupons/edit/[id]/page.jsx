@@ -2,7 +2,7 @@
 
 import Loading from "@/common/Loading";
 import CouponForm from "@/components/CouponForm";
-import { useGetOneCoupons, useUpdateCoupon } from "@/hooks/useCoupons";
+import { useGetOneCoupon, useUpdateCoupon } from "@/hooks/useCoupons";
 import { useGetProducts } from "@/hooks/useProducts";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -10,7 +10,7 @@ import { useParams, useRouter } from "next/navigation";
 
 function CouponUpdatePage() {
   const { id } = useParams();
-  const { isLoading, data } = useGetOneCoupons(id);
+  const { isLoading, data } = useGetOneCoupon(id);
   const { coupon } = data || {};
   const { data: productsData } = useGetProducts();
   const { products } = productsData || {};
