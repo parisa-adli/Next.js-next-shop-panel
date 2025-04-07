@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Toaster />
           <div className="flex bg-white h-screen">
-            <div className="w-[180px] bg-gray-100 overflow-y-auto p-4">
+            <div className="w-[200px] bg-gray-100 overflow-y-auto p-4">
               <AdminSideBar />
             </div>
             <div className="flex-1 overflow-y-auto p-4">{children}</div>
