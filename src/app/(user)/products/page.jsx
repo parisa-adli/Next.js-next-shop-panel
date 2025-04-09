@@ -30,12 +30,12 @@ async function ProductsPage({ searchParams }) {
   ]);
 
   return (
-    <div>
+    <div className="px-4">
       <h1 className="text-xl font-bold mb-6">صفحه محصولات</h1>
-      <div className="flex">
+      <div className="flex flex-col sm:flex-row gap-y-8 sm:gap-0">
         <CategorySidebar categories={categories} />
         <div className="flex-1">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <div
                 className="border rounded-xl shadow-md p-4 space-y-4"

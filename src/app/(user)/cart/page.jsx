@@ -33,14 +33,16 @@ function CartPage() {
     );
 
   return (
-    <div className="grid grid-cols-4 gap-4">
-      <div className="col-span-3 space-y-5">
+    <div className="grid grid-cols-12 gap-4 px-4 ">
+      <div className="col-span-12 lg:col-span-9 space-y-5">
         {cart &&
           cart.productDetail.map((item) => (
             <CartItem key={item._id} cartItem={item} />
           ))}
       </div>
-      <div className="col-span-1"><CartSummary payDetail={cart.payDetail} /></div>
+      <div className="col-span-12 max-w-md lg:col-span-3">
+        <CartSummary payDetail={cart.payDetail} />
+      </div>
     </div>
   );
 }

@@ -42,12 +42,12 @@ function CartItem({ cartItem }) {
   };
 
   return (
-    <div className="border rounded-xl p-4 flex justify-between">
+    <div className="border rounded-xl p-4 flex flex-col gap-y-2 md:flex-row md:justify-between ">
       <Link href={`/products/${cartItem.slug}`}>
-        <span className="flex-1 font-bold">{cartItem.title}</span>
+        <span className="md:flex-1 font-bold">{cartItem.title}</span>
       </Link>
-      <div className="flex items-center justify-between gap-x-8">
-        <div className="border-l-2 pl-4">
+      <div className="grid grid-cols-1 gap-y-2 md:flex items-center justify-between md:gap-x-8">
+        <div className="md:border-l-2 pl-4">
           <div>
             <span>قیمت: </span>
             <span
@@ -69,21 +69,23 @@ function CartItem({ cartItem }) {
             </div>
           )}
         </div>
-        <span>تعداد: {toPersianNumbers(cartItem.quantity)}</span>
-        <div className="flex gap-x-2">
-          <button
-            onClick={addToCartHandler}
-            className="bg-primary-900 text-white rounded p-1"
-          >
-            <HiPlus className="w-4 h-4" />
-          </button>
-          <button onClick={decrementHandler} className="border rounded p-1">
-            {cartItem.quantity > 1 ? (
-              <HiMinus className="w-4 h-4" />
-            ) : (
-              <HiOutlineTrash className="w-6 h-6 text-rose-500" />
-            )}
-          </button>
+        <div className="flex items-center justify-between md:gap-x-8">
+          <span>تعداد: {toPersianNumbers(cartItem.quantity)}</span>
+          <div className="flex gap-x-2">
+            <button
+              onClick={addToCartHandler}
+              className="bg-primary-900 text-white rounded p-1"
+            >
+              <HiPlus className="w-4 h-4" />
+            </button>
+            <button onClick={decrementHandler} className="border rounded p-1">
+              {cartItem.quantity > 1 ? (
+                <HiMinus className="w-4 h-4" />
+              ) : (
+                <HiOutlineTrash className="w-6 h-6 text-rose-500" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
