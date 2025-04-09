@@ -18,7 +18,7 @@ function SideBar() {
 
   return (
     <div>
-      <ul className="flex flex-col space-y-8">
+      <ul className="flex flex-col space-y-8 pt-4">
         <li className="flex items-center gap-x-2">
           <span>
             <IoHome className="btnIcon" />

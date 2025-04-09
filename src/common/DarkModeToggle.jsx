@@ -9,7 +9,7 @@ function DarkModeToggle() {
   return (
     <button
       onClick={toggleDarkMode}
-      className="border border-primary-900 bg-secondary-50 rounded-xl py-0.5 px-2 text-primary-900"
+      className="border border-primary-900 bg-secondary-100 rounded-xl py-0.5 px-2 text-primary-900"
     >
       {isDarkMode ? (
         <HiOutlineSun className="h-5 w-5" />

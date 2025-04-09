@@ -1,7 +1,6 @@
 "use client";
+import DarkModeToggle from "@/common/DarkModeToggle";
 import { useGetUser } from "@/hooks/useAuth";
-import { getUserProfile } from "@/services/authServices";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { FaCartShopping } from "react-icons/fa6";
 
@@ -11,7 +10,7 @@ function Header() {
 
   return (
     <header
-      className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-white
+      className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-secondary-50
         ${
           isLoading
             ? "blur-sm opacity-70 pointer-events-none"
@@ -63,6 +62,7 @@ function Header() {
               </Link>
             </li>
           )}
+          <DarkModeToggle />
         </ul>
       </nav>
     </header>
