@@ -5,8 +5,8 @@ import { Toaster } from "react-hot-toast";
 import Header from "../Header";
 
 export const metadata = {
-  title: "next-shop",
-  description: "next-shop panel admin next app",
+  title: "نکست شاپ",
+  description: "نکست شاپ پنل مدیریت ادمین",
 };
 
 export default function RootLayout({ children }) {
