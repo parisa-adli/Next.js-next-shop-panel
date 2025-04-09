@@ -18,7 +18,7 @@ async function ProductsPage({ searchParams }) {
   // const { categories } = await getCategories();
 
   const cookieStore = await cookies();
-  const strCookies =await toStringCookies(cookieStore);
+  const strCookies = await toStringCookies(cookieStore);
   const productPromise = getProducts(
     queryString.stringify(await searchParams),
     strCookies
@@ -32,13 +32,13 @@ async function ProductsPage({ searchParams }) {
   return (
     <div>
       <h1 className="text-xl font-bold mb-6">صفحه محصولات</h1>
-      <div className="grid grid-cols-4">
+      <div className="flex">
         <CategorySidebar categories={categories} />
-        <div className="col-span-3">
-          <div className="grid grid-cols-3 gap-4">
+        <div className="flex-1">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <div
-                className="col-span-1 border rounded-xl shadow-md p-4 space-y-4"
+                className="border rounded-xl shadow-md p-4 space-y-4"
                 key={product._id}
               >
                 <h2 className="font-bold text-xl ">{product.title}</h2>

@@ -3,7 +3,7 @@ import ProductsSort from "./ProductsSort";
 
 function CategorySidebar({ categories }) {
   return (
-    <div className="col-span-1 space-y-8">
+    <div className="w-[200px] space-y-8">
       <ProductsFilter categories={categories} />
       <ProductsSort />
     </div>

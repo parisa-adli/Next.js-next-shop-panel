@@ -45,8 +45,8 @@ function Header() {
               <span>سبد خرید</span>
               <span className="relative">
                 <FaCartShopping className="w-5 h-5 text-primary-900" />
-                <span className="absolute -bottom-1.5 -right-2 bg-rose-500 px-[3px] rounded-full text-white text-sm">
-                  {cart ? cart.payDetail.productIds.length : 0}
+                <span className="absolute -bottom-1.5 -right-2 bg-rose-500 px-[3px] py-[1px] rounded-xl text-white text-sm">
+                  {/* {cart ? cart.payDetail.productIds.length : 99} */} 0
                 </span>
               </span>
             </Link>
