@@ -1,30 +1,12 @@
 import { adminPaymentListTHeads } from "@/constants/tableHeads";
 import Link from "next/link";
 import { FaEye } from "react-icons/fa";
-import { HiOutlineTrash } from "react-icons/hi2";
-import { FiEdit3 } from "react-icons/fi";
 import { toLocalDateStringShort } from "@/utils/toLocalDate";
-import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useGetPayments } from "@/hooks/usePayments";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumber";
 
 function PaymentListTable({ payments }) {
-  //   const { mutateAsync } = useGetPayments();
-  //   const queryClient = useQueryClient();
-
-  //   const removeCategoryHandler = async (id) => {
-  //     try {
-  //       const { message } = await mutateAsync(id);
-  //       toast.success(message);
-  //       queryClient.invalidateQueries({ queryKey: ["get-categories"] });
-  //     } catch (error) {
-  //       toast.error(error?.response?.data?.message);
-  //     }
-  //   };
-
   return (
-    <div className="shadow-sm overflow-auto my-8">
+    <div className="shadow-sm overflow-auto mt-8">
       <table className="border-collapse table-auto w-full min-w-[800px] text-sm ">
         <thead>
           <tr>
@@ -79,7 +61,7 @@ function PaymentListTable({ payments }) {
               </td>
               <td className="table__td">
                 <Link
-                  className="text-sm text-secondary-700 flex items-center gap-x-1"
+                  className="text-sm flex items-center gap-x-1 text-secondary-600"
                   href={`/admin/payments/${payment._id}`}
                 >
                   <FaEye />

@@ -38,11 +38,9 @@ export function Cart({ title, value, type }) {
       <div className=" ">
         {Icon ? <Icon className="h-20 w-20 text-primary-900" /> : null}
       </div>
-      <div className="flex flex-col items-center gap-4">
-        <h3 className="text-lg text-secondary-700 font-bold">{title}</h3>
-        <p
-          className={`truncate rounded-xl text-2xl font-bold text-secondary-400 py-2 px-4`}
-        >
+      <div className="flex flex-col items-center gap-4 text-gray-800">
+        <h3 className="text-lg font-bold">{title}</h3>
+        <p className={`truncate rounded-xl text-2xl font-bold py-2 px-4`}>
           {value}
         </p>
       </div>

@@ -17,7 +17,7 @@ function AdminSideBar() {
 
   return (
     <div>
-      <ul className="flex flex-col space-y-8">
+      <ul className="flex flex-col space-y-8 text-secondary-700">
         <li className="flex items-center gap-x-2">
           <span>
             <IoHome className="btnIcon" />

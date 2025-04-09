@@ -92,6 +92,7 @@ function ProductForm({
             دسته بندی
           </label>
           <Select
+            className="bg-secondary-100"
             instanceId="category"
             onChange={setSelectedCategory}
             options={categories}

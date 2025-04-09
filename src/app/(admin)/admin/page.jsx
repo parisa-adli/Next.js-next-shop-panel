@@ -7,7 +7,7 @@ async function Admin() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-secondary-700 font-bold text-lg mb-4">داشبورد ادمین</h1>
+        <h1 className="font-bold text-lg mb-4">داشبورد ادمین</h1>
         <Suspense fallback={<Fallback />}>
           <CardsWrapper />
         </Suspense>
