@@ -17,7 +17,7 @@ function AdminSideBar({ onClose, isOpenDrawer }) {
   };
 
   return (
-    <div className="w-[200px] overflow-y-auto p-4 bg-secondary-50">
+    <div className="w-[200px] overflow-y-auto p-4 h-screen bg-secondary-50">
       <ul className="flex flex-col space-y-8 pt-4">
         <li className="flex items-center justify-between">
           <div className="flex items-center gap-x-2">
