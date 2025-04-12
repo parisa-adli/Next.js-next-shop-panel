@@ -151,8 +151,8 @@ function PaymentPage() {
           </div>
           <div>
             <span className="block mb-2">جزئیات پرداخت</span>
-            <div className="border rounded-xl p-4">
-              <table className="border-collapse table-auto w-full min-w-[480px] text-sm ">
+            <div className="border rounded-xl p-4 overflow-x-auto">
+              <table className="border-collapse table-auto w-full text-sm ">
                 <thead>
                   <tr>
                     <td className="table__th">قیمت اصلی</td>
@@ -184,8 +184,8 @@ function PaymentPage() {
           </div>
           <div>
             <span className="block mb-2">اطلاعات کاربر</span>
-            <div className="border rounded-xl p-4">
-              <table className="border-collapse table-auto w-full min-w-[480px] text-sm ">
+            <div className="border rounded-xl p-4 overflow-x-auto">
+              <table className="border-collapse table-auto w-full text-sm ">
                 <thead>
                   <tr>
                     <td className="table__th">نام کاربر</td>

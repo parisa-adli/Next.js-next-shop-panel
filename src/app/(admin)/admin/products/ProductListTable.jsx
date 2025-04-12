@@ -10,16 +10,22 @@ import { FiEdit3 } from "react-icons/fi";
 import { useRemoveProduct } from "@/hooks/useProducts";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { Modal } from "@/common/Modal";
+import ConfirmDelete from "@/common/ConfirmDelete";
+import { useState } from "react";
 
 function ProductListTable({ products }) {
   const { mutateAsync } = useRemoveProduct();
   const queryClient = useQueryClient();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   const removeProductHandler = async (id) => {
     try {
       const { message } = await mutateAsync(id);
       toast.success(message);
       queryClient.invalidateQueries({ queryKey: ["get-products"] });
+      setIsOpen(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -63,17 +69,32 @@ function ProductListTable({ products }) {
                   <Link href={`/admin/products/edit/${product._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button
-                    onClick={() => removeProductHandler(product._id)}
+                  <div
+                    onClick={() => {
+                      setSelected(product);
+                      setIsOpen(true);
+                    }}
+                    className="cursor-pointer"
                   >
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
-                  </button>
+                  </div>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={`حذف محصول ${selected.title}`}
+      >
+        <ConfirmDelete
+          resourceName={selected.title}
+          onClose={() => setIsOpen(false)}
+          onConfirm={() => removeProductHandler(selected._id)}
+        />
+      </Modal>
     </div>
   );
 }

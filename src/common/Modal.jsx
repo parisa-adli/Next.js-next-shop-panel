@@ -4,7 +4,7 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 
 export function Modal({ open, onClose, title, children, description = "" }) {
   const ref = useOutsideClick(onClose);
-  console.log(ref);
+
   return (
     open &&
     createPortal(

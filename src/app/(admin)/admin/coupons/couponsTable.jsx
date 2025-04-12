@@ -11,16 +11,22 @@ import {
   toPersianNumbersWithComma,
 } from "@/utils/toPersianNumber";
 import { useRemoveCoupon } from "@/hooks/useCoupons";
+import { Modal } from "@/common/Modal";
+import ConfirmDelete from "@/common/ConfirmDelete";
+import { useState } from "react";
 
 function CouponsTable({ coupons }) {
   const { mutateAsync } = useRemoveCoupon();
   const queryClient = useQueryClient();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   const removeCouponHandler = async (id) => {
     try {
       const { message } = await mutateAsync(id);
       toast.success(message);
       queryClient.invalidateQueries({ queryKey: ["get-coupons"] });
+      setIsOpen(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -75,15 +81,32 @@ function CouponsTable({ coupons }) {
                   <Link href={`/admin/coupons/edit/${coupon._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button onClick={() => removeCouponHandler(coupon._id)}>
+                  <div
+                    onClick={() => {
+                      setSelected(coupon);
+                      setIsOpen(true);
+                    }}
+                    className="cursor-pointer"
+                  >
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
-                  </button>
+                  </div>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={`حذف کد تخفیف ${selected.code}`}
+      >
+        <ConfirmDelete
+          resourceName={selected.code}
+          onClose={() => setIsOpen(false)}
+          onConfirm={() => removeCouponHandler(selected._id)}
+        />
+      </Modal>
     </div>
   );
 }
