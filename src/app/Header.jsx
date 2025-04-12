@@ -43,13 +43,13 @@ function Header() {
             <DarkModeToggle />
             {user ? (
               <div className="relative flex items-center gap-x-6  border-l pl-4 border-secondary-700">
-                <button onClick={() => setIsOpen((prev) => !prev)}>
+                <div onClick={() => setIsOpen((prev) => !prev)} className="cursor-pointer">
                   <FaUserAlt className="w-5 h-5 text-secondary-600" />
                   {isOpen && (
                     <DropDown user={user} onClose={() => setIsOpen(false)} />
                   )}
                   {/* {user.name} */}
-                </button>
+                </div>
               </div>
             ) : (
               <li>

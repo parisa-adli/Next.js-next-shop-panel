@@ -1,5 +1,4 @@
 import { createPortal } from "react-dom";
-import HeaderPanel from "./HeaderPanel";
 
 function Drawer({ open, onClose, children }) {
   return createPortal(
@@ -20,7 +19,6 @@ function Drawer({ open, onClose, children }) {
           event.stopPropagation();
         }}
       >
-        {/* <HeaderPanel>پنل ادمین</HeaderPanel> */}
         <div className="bg-secondary-0 h-full overflow-y-auto">{children}</div>
       </div>
     </>,

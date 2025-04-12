@@ -1,11 +1,10 @@
 import { IoClose } from "react-icons/io5";
 import { createPortal } from "react-dom";
-import { useEffect, useRef } from "react";
-import Button from "./Button";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 export function Modal({ open, onClose, title, children, description = "" }) {
-//   const ref = useOutsideClick(onClose);
-
+  const ref = useOutsideClick(onClose);
+  console.log(ref);
   return (
     open &&
     createPortal(
@@ -14,9 +13,9 @@ export function Modal({ open, onClose, title, children, description = "" }) {
            w-full h-screen bg-opacity-30 z-50"
       >
         <div
-        //   ref={ref}
+          ref={ref}
           className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-        rounded-lg bg-white p-4 shadow-lg transition-all duration-500 ease-out
+        rounded-lg bg-secondary-0 p-4 shadow-lg transition-all duration-500 ease-out
         w-[calc(100vw-2rem)] md:max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto"
         >
           <div
@@ -38,43 +37,5 @@ export function Modal({ open, onClose, title, children, description = "" }) {
       </div>,
       document.body
     )
-  );
-}
-
-// export function useOutsideClick(handler, listenCapturing = true) {
-//   const ref = useRef();
-
-//   useEffect(() => {
-//     function handleClick(e) {
-//       if (ref.current && !ref.current.contains(e.target)) {
-//         console.log(ref);
-//         handler();
-//       }
-//     }
-
-//     document.addEventListener("click", handleClick, listenCapturing);
-
-//     return () =>
-//       document.removeEventListener("click", handleClick, listenCapturing);
-//   }, [open, listenCapturing]);
-
-//   return ref;
-// }
-
-export function ConfirmDelete({ onClose, disabled, onConfirm }) {
-  return (
-    <div>
-      <h2 className="font-bold text-base mb-8 text-secondary-700">
-        آیا از حذف مطمین هستید؟
-      </h2>
-      <form action={onConfirm}>
-        <div className="flex justify-between items-center gap-x-16">
-          <Button onClick={onClose}>لغو</Button>
-          <Button onClick={onConfirm} disabled={disabled}>
-            حذف
-          </Button>
-        </div>
-      </form>
-    </div>
   );
 }

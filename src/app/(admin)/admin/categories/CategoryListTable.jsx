@@ -1,3 +1,5 @@
+"use client";
+
 import { categoryListTHeads } from "@/constants/tableHeads";
 import Link from "next/link";
 import { FaEye } from "react-icons/fa";
@@ -7,16 +9,22 @@ import { toLocalDateStringShort } from "@/utils/toLocalDate";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRemoveCategory } from "@/hooks/useCategories";
 import toast from "react-hot-toast";
+import { Modal } from "@/common/Modal";
+import { useState } from "react";
+import ConfirmDelete from "@/common/ConfirmDelete";
 
 function CategoryListTable({ categories }) {
   const { mutateAsync } = useRemoveCategory();
   const queryClient = useQueryClient();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   const removeCategoryHandler = async (id) => {
     try {
       const { message } = await mutateAsync(id);
       toast.success(message);
       queryClient.invalidateQueries({ queryKey: ["get-categories"] });
+      setIsOpen(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -58,15 +66,33 @@ function CategoryListTable({ categories }) {
                   <Link href={`/admin/categories/edit/${category._id}`}>
                     <FiEdit3 className="w-5 h-5 text-secondary-600" />
                   </Link>
-                  <button onClick={() => removeCategoryHandler(category._id)}>
+                  <div
+                    onClick={() => {
+                      setSelected(category);
+                      setIsOpen(true);
+                    }}
+                    className="cursor-pointer"
+                    // onClick={() => removeCategoryHandler(category._id)}
+                  >
                     <HiOutlineTrash className="w-5 h-5 text-rose-500" />
-                  </button>
+                  </div>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={`حذف دسته بندی ${selected.title}`}
+      >
+        <ConfirmDelete
+          resourceName={selected.title}
+          onClose={() => setIsOpen(false)}
+          onConfirm={() => removeCategoryHandler(selected._id)}
+        />
+      </Modal>
     </div>
   );
 }

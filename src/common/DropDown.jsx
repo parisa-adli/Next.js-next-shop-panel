@@ -6,15 +6,16 @@ import Link from "next/link";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 function DropDown({ user, onClose }) {
-  //   const ref = useOutsideClick(onClose);
+  const ref = useOutsideClick(onClose);
   const logoutHandler = async () => {
     await logout();
     document.location.href = "/";
   };
+  console.log(ref);
 
   return (
     <div
-      //   ref={ref}
+      ref={ref}
       className="absolute left-0 mt-2 w-48 bg-secondary-50 border border-secondary-100 rounded-lg shadow-lg z-10"
     >
       <div className="flex flex-col gap-y-4 p-4">

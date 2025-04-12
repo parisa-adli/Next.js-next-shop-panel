@@ -5,16 +5,17 @@ export default function useOutsideClick(handler, listenCapturing = true) {
 
   useEffect(() => {
     function handleClick(e) {
+      e.stopPropagation();
       if (ref.current && !ref.current.contains(e.target)) {
         handler();
       }
     }
 
-    document.addEventListener("click", handleClick, listenCapturing);
+    document.addEventListener("mousedown", handleClick, listenCapturing);
 
     return () =>
-      document.removeEventListener("click", handleClick, listenCapturing);
-  }, [open, listenCapturing]);
+      document.removeEventListener("mousedown", handleClick, listenCapturing);
+  }, [handler, listenCapturing]);
 
   return ref;
 }
