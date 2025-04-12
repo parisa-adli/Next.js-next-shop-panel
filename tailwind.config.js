@@ -19,6 +19,9 @@ module.exports = {
   darkMode: ["class", '[class="dark-mode"]'],
   theme: {
     extend: {
+      screens: {
+        xs: "380px",
+      },
       colors: {
         primary: {
           900: withOpacity("--color-primary-900"),

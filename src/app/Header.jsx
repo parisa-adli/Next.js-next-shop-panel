@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <header
-      className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-secondary-50
+      className={`shadow-md mb-10 px-4 sticky top-0 transition-all duration-200 bg-secondary-50
         ${
           isLoading
             ? "blur-sm opacity-70 pointer-events-none"
@@ -26,7 +26,7 @@ function Header() {
     >
       <nav>
         <ul className="flex items-center justify-between py-2 container xl:max-w-screen-xl">
-          <div className="flex items-center gap-x-8">
+          <div className="flex items-center gap-x-4 sm:gap-x-8">
             <li>
               <Link className="py-2 flex items-center gap-x-2" href="/">
                 <Image src="/shop.png" alt="نکست شاپ" width={24} height={24} />

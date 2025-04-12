@@ -46,7 +46,7 @@ function AddToCart({ product }) {
       {isInCart(user, product) ? (
         <Link
           href="/cart"
-          className="inline-block bg-gray-50 text-primary-700 font-bold border-[3px] border-primary-700 rounded-md py-1 px-6 shadow-md shadow-primary-300"
+          className="inline-block bg-secondary-50 text-primary-700 font-bold border-[3px] border-primary-700 rounded-md py-1 px-6 shadow-md shadow-secondary-200"
         >
           <div className="flex items-center gap-x-3">
             <span>ادامه سفارش</span>
