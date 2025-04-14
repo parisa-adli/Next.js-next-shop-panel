@@ -1,4 +1,5 @@
 import {
+  addCouponToCart,
   addNewCoupon,
   getAllCoupons,
   getOneCoupon,
@@ -30,3 +31,8 @@ export const useUpdateCoupon = () => useMutation({ mutationFn: updateCoupon });
 export const useRemoveCoupon = () => {
   return useMutation({ mutationFn: removeCoupon });
 };
+
+export const useAddCouponToCart = () =>
+  useMutation({
+    mutationFn: addCouponToCart,
+  });

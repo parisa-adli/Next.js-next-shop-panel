@@ -9,7 +9,7 @@ import CartSummary from "./CartSummary";
 function CartPage() {
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
-
+  console.log("cart", cart);
   if (isLoading) return <Loading />;
 
   if (!user || !cart)

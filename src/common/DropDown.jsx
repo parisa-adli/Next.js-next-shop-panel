@@ -11,7 +11,6 @@ function DropDown({ user, onClose }) {
     await logout();
     document.location.href = "/";
   };
-  console.log(ref);
 
   return (
     <div

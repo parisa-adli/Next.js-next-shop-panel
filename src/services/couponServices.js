@@ -23,3 +23,11 @@ export function removeCoupon(id) {
     .delete(`/admin/coupon/remove/${id}`)
     .then(({ data }) => data.data);
 }
+
+export function addCouponToCart(data) {
+  return http.post("/cart/coupon", data).then(({ data }) => data.data);
+}
+
+export function deleteCouponToCart(data) {
+  return http.delete("/cart/coupon", data).then(({ data }) => data.data);
+}
