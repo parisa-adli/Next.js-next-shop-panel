@@ -43,15 +43,14 @@ async function ProductsPage({ searchParams }) {
                 className="border rounded-xl shadow-md p-4 space-y-4 "
                 key={product._id}
               >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-md ">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-lg ">
                   <Image
                     src={product.imageLink}
-                    alt="محصول"
+                    alt={product.title}
                     fill
                     className="w-full h-full object-contain"
                   />
                 </div>
-
                 <Link
                   className="block font-bold"
                   href={`/products/${product.slug}`}
