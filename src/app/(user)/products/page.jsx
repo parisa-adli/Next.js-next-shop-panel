@@ -8,6 +8,8 @@ import AddToCart from "./[slug]/AddToCart";
 import LikeProduct from "./LikeProduct";
 import { cookies } from "next/headers";
 import { toStringCookies } from "@/utils/toStringCookies";
+import Image from "next/image";
+import { toPersianNumbersWithComma } from "@/utils/toPersianNumber";
 
 export const dynamic = "force-dynamic"; // eq to { cache: 'no-store'} or SSR in page
 
@@ -35,27 +37,33 @@ async function ProductsPage({ searchParams }) {
       <div className="flex flex-col sm:flex-row gap-y-8 sm:gap-0">
         <CategorySidebar categories={categories} />
         <div className="flex-1">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((product) => (
               <div
-                className="border rounded-xl shadow-md p-4 space-y-4"
+                className="border rounded-xl shadow-md p-4 space-y-4 "
                 key={product._id}
               >
-                <h2 className="font-bold text-xl ">{product.title}</h2>
-                <div className="">
-                  <span>تاریخ ساختن: </span>
-                  <span className="font-bold">
-                    {toLocalDateStringShort(product.createdAt)}
-                  </span>
+                <div className="relative aspect-[3/4] overflow-hidden rounded-md ">
+                  <Image
+                    src={product.imageLink}
+                    alt="محصول"
+                    fill
+                    className="w-full h-full object-contain"
+                  />
                 </div>
-                <div className="flex items-center gap-x-2">
+
+                <Link
+                  className="block font-bold"
+                  href={`/products/${product.slug}`}
+                >
+                  {product.title}
+                </Link>
+                <div className="flex items-center justify-between">
                   <LikeProduct product={product} />
-                  <Link
-                    className="block text-primary-900 font-bold border-r pr-2"
-                    href={`/products/${product.slug}`}
-                  >
-                    مشاهده محصول
-                  </Link>
+                  <div className="flex items-center gap-x-1 text-lg">
+                    <p>{toPersianNumbersWithComma(product.price)}</p>
+                    <span className="text-xs">تومان</span>
+                  </div>
                 </div>
                 <AddToCart product={product} />
               </div>

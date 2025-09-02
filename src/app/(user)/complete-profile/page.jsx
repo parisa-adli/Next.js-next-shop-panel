@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeProfile } from "@/services/authServices";
 import RHFTextField from "@/common/RHFTextField";
-import SpinnerMini from "@/pages/(user)/auth/SpinnerMini";
+import Loading from "@/common/Loading";
 
 function CompleteProfile() {
   const router = useRouter();
@@ -66,7 +66,7 @@ function CompleteProfile() {
           />
           {isPending ? (
             <div className="flex justify-center">
-              <SpinnerMini />
+              <Loading />
             </div>
           ) : (
             <Button>تایید</Button>

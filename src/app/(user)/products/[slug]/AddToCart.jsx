@@ -46,7 +46,7 @@ function AddToCart({ product }) {
       {isInCart(user, product) ? (
         <Link
           href="/cart"
-          className="inline-block bg-secondary-50 text-primary-700 font-bold border-[3px] border-primary-700 rounded-md py-1 px-6 shadow-md shadow-secondary-200"
+          className="flex items-center justify-center bg-secondary-50 text-primary-700 font-bold btn btn--primary border border-primary-900 w-full"
         >
           <div className="flex items-center gap-x-3">
             <span>ادامه سفارش</span>
@@ -60,7 +60,7 @@ function AddToCart({ product }) {
           <Loading justifyContent="flex-start" width="45" height="15" />
         </div>
       ) : (
-        <button onClick={addToCartHandler} className="btn btn--primary">
+        <button onClick={addToCartHandler} className="btn btn--primary w-full">
           اضافه کردن به سبد خرید
         </button>
       )}

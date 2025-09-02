@@ -36,6 +36,7 @@ async function SlugPage({ params }) {
         ]}
       />
       <div className="space-y-6">
+        <img src={product.imageLink} alt="product-img" />
         <h1 className="font-bold text-2xl ">{product.title}</h1>
         <p>{product.description}</p>
         <p>
